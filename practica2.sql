@@ -59,3 +59,87 @@ CREATE TABLE Tarea (
   `prerrequisitos` varchar(1000) NOT NULL,
   PRIMARY KEY(`codigo`)
 );
+CREATE TABLE Estar (
+`codigo` int NOT NULL,
+`codigo` int NOT NULL,
+PRIMARY KEY (`codigo`,`codigo`),
+FOREIGN KEY (`codigo`) REFERENCES Poblacion (`codigo`) 
+	ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY (`codigo`) REFERENCES Provincia (`codigo`) 
+	ON DELETE CASCADE ON UPDATE CASCADE
+);
+CREATE TABLE Estar (
+`codigo` int NOT NULL,
+`codigo` int NOT NULL,
+PRIMARY KEY (`codigo`,`codigo`),
+FOREIGN KEY (`codigo`) REFERENCES Poblacion (`codigo`) 
+	ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY (`codigo`) REFERENCES Local (`codigo`) 
+	ON DELETE CASCADE ON UPDATE CASCADE
+);
+CREATE TABLE Vender (
+`codigo` int NOT NULL,
+`codigo` int NOT NULL,
+PRIMARY KEY (`codigo`,`codigo`),
+FOREIGN KEY (`codigo`) REFERENCES Producto (`codigo`) 
+	ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY (`codigo`) REFERENCES Local (`codigo`) 
+	ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE Trabajar (
+`fecha_inicio` DATE NOT NULL,
+`fecha_fin` DATE NOT NULL,
+`codigo` int NOT NULL,
+`codigo` int NOT NULL,
+PRIMARY KEY (`codigo`,`codigo`,`fecha_inicio`),
+FOREIGN KEY (`codigo`) REFERENCES Empleado (`codigo`) 
+	ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY (`codigo`) REFERENCES Local (`codigo`) 
+	ON DELETE CASCADE ON UPDATE CASCADE
+);
+CREATE TABLE Realizar_turno (
+`fecha_inicio` DATE NOT NULL,
+`horas` TIME NOT NULL,
+`horas_inicio`TIME NOT NULL,
+`codigo` int NOT NULL,
+`codigo` int NOT NULL,
+PRIMARY KEY (`codigo`,`codigo`,`fecha_inicio`),
+FOREIGN KEY (`codigo`) REFERENCES Empleado (`codigo`) 
+	ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY (`codigo`) REFERENCES Local (`codigo`) 
+	ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY (`codigo`) REFERENCES Tarea (`codigo`) 
+	ON DELETE CASCADE ON UPDATE CASCADE
+);
+CREATE TABLE Supervisa (
+`codigo` int NOT NULL,
+`codigo` int NOT NULL,
+PRIMARY KEY (`codigo`,`codigo`),
+FOREIGN KEY (`codigo`) REFERENCES Empleado (`codigo`) 
+	ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY (`codigo`) REFERENCES Empleado (`codigo`) 
+	ON DELETE CASCADE ON UPDATE CASCADE
+);
+CREATE TABLE Pertenecer (
+`codigo` int NOT NULL,
+`codigo` int NOT NULL,
+PRIMARY KEY (`codigo`,`codigo`),
+FOREIGN KEY (`codigo`) REFERENCES Producto (`codigo`) 
+	ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY (`codigo`) REFERENCES Categoria (`codigo`) 
+	ON DELETE CASCADE ON UPDATE CASCADE
+);
+CREATE TABLE Contener (
+`cantidad` int NOT NULL,
+`codigo` int NOT NULL,
+`codigo` int NOT NULL,
+`codigo` int NOT NULL,
+PRIMARY KEY (`codigo`,`codigo`,`codigo`),
+FOREIGN KEY (`codigo`) REFERENCES Ingrediente (`codigo`) 
+	ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY (`codigo`) REFERENCES Producto (`codigo`) 
+	ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY (`codigo`) REFERENCES Modo_Cocinado (`codigo`) 
+	ON DELETE CASCADE ON UPDATE CASCADE
+);
