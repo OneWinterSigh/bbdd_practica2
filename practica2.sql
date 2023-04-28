@@ -6,12 +6,16 @@ CREATE TABLE Local (
   `codigo_postal` int NOT NULL,
   `calle` varchar(30) NOT NULL,
   `numero` int NOT NULL,
-  PRIMARY KEY (`codigo`)
+  `codigo_poblacion` int NOT NULL,
+  PRIMARY KEY (`codigo`),
+  FOREIGN KEY('codigo_poblacion') REFERENCES Poblacion('codigo') ON DELETE CASCADE ON UPDATE CASCADE
 );
 CREATE TABLE Poblacion (
   `codigo` int NOT NULL,
   `nombre` varchar(20) NOT NULL,
-  PRIMARY KEY(`codigo`)
+  `codigo_provincia` int NOT NULL,
+  PRIMARY KEY(`codigo`),
+  FOREIGN KEY(`codigo_provincia`) REFERENCES Provincia(`codigo`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 CREATE TABLE Provincia (
   `codigo` int NOT NULL,
@@ -23,7 +27,9 @@ CREATE TABLE Producto (
   `nombre` varchar(30) NOT NULL,
   `descripcion` varchar(100) NOT NULL,
   `precio_base` int NOT NULL,
-  PRIMARY KEY(`codigo`)
+  `codigo_categoria` int NOT NULL,
+  PRIMARY KEY(`codigo`),
+  FOREIGN KEY(`codigo_categoria`) REFERENCES Categoria(`codigo`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 CREATE TABLE Categoria (
   `codigo` int NOT NULL,
@@ -50,7 +56,8 @@ CREATE TABLE Empleado (
   `nombre` varchar(20) NOT NULL,
   `primer_apellido` varchar(20) NOT NULL,
   `segundo_apellido` varchar(20) NOT NULL,
-  PRIMARY KEY(`codigo`)
+  `codigo_empleado` int NOT NULL,
+  PRIMARY KEY(`codigo`) FOREIGN KEY(`codigo_empleado`) REFERENCES Empleado(`codigo`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 CREATE TABLE Tarea (
   `codigo` int NOT NULL,
@@ -58,20 +65,6 @@ CREATE TABLE Tarea (
   `coste` int NOT NULL,
   `prerrequisitos` varchar(1000) NOT NULL,
   PRIMARY KEY(`codigo`)
-);
-CREATE TABLE poblacion_provincia (
-  `codigo_provincia` int NOT NULL,
-  `codigo_poblacion` int NOT NULL,
-  PRIMARY KEY (`codigo_local`, `codigo_poblacion`),
-  FOREIGN KEY (`codigo_poblacion`) REFERENCES Poblacion (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (`codigo_provincia`) REFERENCES Provincia (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE
-);
-CREATE TABLE poblacion_provincia (
-  `codigo_poblacion` int NOT NULL,
-  `codigo_local` int NOT NULL,
-  PRIMARY KEY (`codigo`, `codigo`),
-  FOREIGN KEY (`codigo_poblacion`) REFERENCES Poblacion (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (`codigo_local`) REFERENCES Local (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 CREATE TABLE local_producto (
   `codigo_producto` int NOT NULL,
@@ -104,20 +97,6 @@ CREATE TABLE local_empleado_tarea (
   FOREIGN KEY (`codigo_empleado`) REFERENCES Empleado (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE,
   FOREIGN KEY (`codigo_local`) REFERENCES Local (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE,
   FOREIGN KEY (`codigo_tarea`) REFERENCES Tarea (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE
-);
-CREATE TABLE emplado_empleado (
-  `codigo_empleado` int NOT NULL,
-  `codigo_empleado` int NOT NULL,
-  PRIMARY KEY (`codigo_empleado`, `codigo_empleado`),
-  FOREIGN KEY (`codigo_empleado`) REFERENCES Empleado (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (`codigo_empleado`) REFERENCES Empleado (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE
-);
-CREATE TABLE producto_categoria (
-  `codigo_producto` int NOT NULL,
-  `codigo_categoria` int NOT NULL,
-  PRIMARY KEY (`codigo_producto`, `codigo_categoria`),
-  FOREIGN KEY (`codigo_producto`) REFERENCES Producto (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (`codigo_categoria`) REFERENCES Categoria (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 CREATE TABLE producto_ingrediente_modo_cocinado (
   `cantidad` int NOT NULL,
