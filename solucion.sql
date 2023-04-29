@@ -78,7 +78,11 @@ CREATE TABLE local_empleado (
   `fecha_fin` DATE NOT NULL,
   `codigo_empleado` int NOT NULL,
   `codigo_local` int NOT NULL,
-  PRIMARY KEY (`codigo`, `codigo`, `fecha_inicio`),
+  PRIMARY KEY (
+    `codigo_local`,
+    `codigo_empleado`,
+    `fecha_inicio`
+  ),
   FOREIGN KEY (`codigo_empleado`) REFERENCES Empleado (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE,
   FOREIGN KEY (`codigo_local`) REFERENCES Local (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -91,7 +95,7 @@ CREATE TABLE local_empleado_tarea (
   `codigo_tarea` int NOT NULL,
   PRIMARY KEY (
     `codigo_empleado`,
-    `cocodigo_localdigo`,
+    `codigo_local`,
     `fecha_inicio`
   ),
   FOREIGN KEY (`codigo_empleado`) REFERENCES Empleado (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE,
